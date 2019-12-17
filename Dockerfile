@@ -1,4 +1,3 @@
-ericdeMacBook-Pro:s2i-tomcat ericnie$ cat Dockerfile
 FROM openshift/base-centos7
 
 EXPOSE 8080
