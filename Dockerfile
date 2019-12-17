@@ -4,7 +4,7 @@ EXPOSE 8080
 
 ENV TOMCAT_VERSION=8.5.34 \
     MAVEN_VERSION=3.5.4 \
-    STI_SCRIPTS_PATH=/usr/libexec/s2i/
+    STI_SCRIPTS_PATH=/s2i-tomcat/s2i/
 
 LABEL io.k8s.description="Platform for building and running JEE applications on Tomcat" \
       io.k8s.display-name="Tomcat Builder" \
