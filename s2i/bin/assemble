@@ -1,15 +1,16 @@
+ericdeMacBook-Pro:bin ericnie$ cat assemble
 #!/bin/bash -e
 #
 # S2I assemble script for the 's2i-tomcat' image.
 # The 'assemble' script builds your application source so that it is ready to run.
 #
 # For more information refer to the documentation:
-#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#    https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
 # If the 's2i-tomcat' assemble script is executed with the '-h' flag, print the usage.
 if [[ "$1" == "-h" ]]; then
-	exec /usr/libexec/s2i/usage
+    exec /usr/libexec/s2i/usage
 fi
 
 # Restore artifacts from the previous build (if they exist).
@@ -20,9 +21,21 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
 fi
 
 echo "---> Installing application source..."
-cp -Rf /tmp/src/. ./
+#cp -Rf /tmp/src/. ./
+a=`ls /tmp/`
+echo $a
+echo "**********"
+b=`ls /opt/s2i/destination/`
+echo $b
+echo "------***"
+c=`ls /opt/s2i/destination/src`
+echo $c
+
+cp -R /opt/s2i/destination/src/.  ./
+
 
 echo "---> Building application from source..."
 # TODO: Add build steps for your application, eg npm install, bundle install, pip install, etc.
+
 mvn -Dmaven.test.skip=true clean package
-mv ./target/* .war /tomcat/webapps/
+mv ./target/*.war /tomcat/webapps/
